@@ -61,55 +61,53 @@ app.post('/api/accounts', function (req, res, next) {
 	var newAcct = req.body;
 	newAcct.id = accounts.length + 1;
 	accounts.push(newAcct);
-	res.sendStatus(200);
+	res.json({id: newAcct.id});
 });
 
 
 
- app.post('/api/accounts/cardtype/:id',function (req, res, next) {
- accounts.map(function (e,i) {
- if (e.id == req.params.id) {
- e.card_type = req.body.card_type;
- res.sendStatus(200);
- }
- })
- });
+app.post('/api/accounts/cardtype/:id', function (req, res, next) {
+	accounts.map(function (e, i) {
+		if (e.id == req.params.id) {
+			e.card_type = req.body.card_type;
+			res.sendStatus(200);
+		}
+	});
+});
+
+app.post('/api/accounts/approvedstates/:id', function (req, res, next) {
+	if (req.params.id) {
+		var id = req.params.id;
+		console.log(req.params);
+		var state = req.query.state;
+		console.log(req.query);
+		
+		accounts.map(function (e, i) {
+			if (accounts[i].id == id) {
+				accounts[i].approved_states.push(state);
+				console.log(accounts[i]);
+				res.sendStatus(200);
+			}
+		});
+	} else {
+		res.sendStatus(400);
+	}
+});
 
 
 
- app.post('/api/accounts/approvedstates/:id', function (req,res,next) {
- if(req.params.id) {
- var id = req.params.id;
- console.log(req.params);
- var state = req.query.state;
- console.log(req.query);
- 
- accounts.map(function (e,i) {
- if (accounts[i].id == id) {
- accounts[i].approved_states.push(state);
- console.log(accounts[i]);
- res.sendStatus(200);
- }
- });
- } else {
- res.sendStatus(400);
- }
- });
-
-
-
- app.delete('/api/accounts/:id', function (req, res, next) {
- var id = req.params.id;
- console.log('delete id = ' + id);
- 
- 
- accounts.map(function (e,i) {
- if (id == accounts[i].id) {
- accounts.splice(i,1);
- res.sendStatus(200)
- }
- })
- });
+app.delete('/api/accounts/:id', function (req, res, next) {
+	var id = req.params.id;
+	console.log('delete id = ' + id);
+	
+	
+	accounts.map(function (e, i) {
+		if (id == accounts[i].id) {
+			accounts.splice(i, 1);
+			res.sendStatus(200)
+		}
+	})
+});
 
 
 
@@ -123,7 +121,7 @@ app.delete('/api/accounts/approvedstates/:id', function (req, res, next) {
 		if (accounts[i].id == id) {
 			for (var j = 0; j < accounts[i].approved_states.length; j++) {
 				if (accounts[i].approved_states[j] == state) {
-					accounts[i].approved_states.splice(j,1)
+					accounts[i].approved_states.splice(j, 1)
 					res.sendStatus(200)
 				}
 			}
