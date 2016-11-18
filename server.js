@@ -66,7 +66,6 @@ app.post('/api/accounts', function (req, res, next) {
 
 
 
-/*
  app.post('/api/accounts/cardtype/:id',function (req, res, next) {
  accounts.map(function (e,i) {
  if (e.id == req.params.id) {
@@ -75,11 +74,9 @@ app.post('/api/accounts', function (req, res, next) {
  }
  })
  });
- */
 
 
 
-/*
  app.post('/api/accounts/approvedstates/:id', function (req,res,next) {
  if(req.params.id) {
  var id = req.params.id;
@@ -98,11 +95,9 @@ app.post('/api/accounts', function (req, res, next) {
  res.sendStatus(400);
  }
  });
-*/
 
 
 
-/*
  app.delete('/api/accounts/:id', function (req, res, next) {
  var id = req.params.id;
  console.log('delete id = ' + id);
@@ -115,11 +110,9 @@ app.post('/api/accounts', function (req, res, next) {
  }
  })
  });
- */
 
 
 
-/*
 app.delete('/api/accounts/approvedstates/:id', function (req, res, next) {
 	var id = req.params.id;
 	console.log(req.params);
@@ -138,7 +131,6 @@ app.delete('/api/accounts/approvedstates/:id', function (req, res, next) {
 	});
 	
 });
-*/
 
 
 app.listen(3000, function () {
