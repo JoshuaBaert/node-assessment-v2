@@ -75,6 +75,7 @@ app.post('/api/accounts/cardtype/:id', function (req, res, next) {
 	});
 });
 
+
 app.post('/api/accounts/approvedstates/:id', function (req, res, next) {
 	if (req.params.id) {
 		var id = req.params.id;
@@ -84,6 +85,7 @@ app.post('/api/accounts/approvedstates/:id', function (req, res, next) {
 		
 		accounts.map(function (e, i) {
 			if (accounts[i].id == id) {
+				console.log(accounts[i].approved_states);
 				accounts[i].approved_states.push(state);
 				console.log(accounts[i]);
 				res.sendStatus(200);
@@ -92,6 +94,18 @@ app.post('/api/accounts/approvedstates/:id', function (req, res, next) {
 	} else {
 		res.sendStatus(400);
 	}
+});
+
+app.put('/api/accounts/:id', function (req,res,next) {
+	var id = req.params.id
+	accounts.map(function (e, i) {
+		if (e.id = id ) {
+			for (var key in req.body) {
+				e[key] = req.body[key]
+			}
+			res.sendStatus(200);
+		}
+	})
 });
 
 
